@@ -4,9 +4,13 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+//var passport = require('passport');    //페북인증
+//var configAuth = require('./config/auth');  // 페북인증
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var auth = require('./routes/auth');
 
 var app = express();
 
@@ -14,8 +18,15 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+
+// mongodb connect  이부분은 내가 새로 수정하기
+mongoose.connect('mongodb://webuser:webuser@ds053954.mongolab.com:53954/webwebweb');
+mongoose.connection.on('error', console.log);
+
+// uncomment after placing your favicon in /public    // 페북인증용
+//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));     // 페북인증용
+
+
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -24,6 +35,28 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+
+
+
+
+
+//app.use(passport.initialize());    // 페북인증
+//app.use(passport.session());      // 페북인증용
+
+app.use(function(req, res, next) {
+  console.log("REQ USER", req.user);
+  res.locals.currentUser = req.user;
+  res.locals.flashMessages = req.flash();
+  next();
+});
+
+//configAuth(passport);  //페북인증용
+
+app.use('/', routes);
+app.use('/users', users);
+//routeAuth(app, passport);   //페북인증용
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
