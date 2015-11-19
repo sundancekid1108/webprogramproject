@@ -5,6 +5,9 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var flash = require('connect-flash');
+var session = require('express-session');
+var methodOverride = require('method-override');
 //var passport = require('passport');    //페북인증
 //var configAuth = require('./config/auth');  // 페북인증
 
@@ -31,7 +34,17 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(flash());
+
+app.use(session({
+  resave: true,
+  saveUninitialized: true,
+  secret: 'long-long-long-secret-string-1313513tefgwdsvbjkvasd'
+}));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(methodOverride('_method', {methods: ['POST', 'GET']}));
+app.use('/bower_components',  express.static(path.join(__dirname, '/bower_components')));
+
 
 app.use('/', routes);
 app.use('/users', users);

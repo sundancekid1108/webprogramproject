@@ -6,10 +6,6 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-router.get('/signin', function(req, res, next) {
-  res.render('signin');
-});
-
 
 
 module.exports = router;
