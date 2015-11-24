@@ -10,12 +10,13 @@
       a.navbar-brand(href='/') postcheck
     .collapse.navbar-collapse
       ul.nav.navbar-nav
-        li
-          a(href='/')  여기에
-        li  
-          a(href='/')  여기에
-        li  
-          a(href='/')  여기에
-        li
-          a(href='/')  여기에
-          
+          if (currentUser)
+            li
+              a(herf='/users/#{currentUser.id}') Profile
+            li
+              a(href='/signout') signout
+          else
+            li
+              a(href = '/signin') signin
+            li
+              a(href='/users/new') signup
