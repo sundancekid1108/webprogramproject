@@ -1,16 +1,10 @@
 extends layout
 
 block main-interface
-    .container
-      div(style='margin-top: 100px;')
-        h1 로그인화면
-        form.form-signin
-          h2.form-signin-heading
-          label.sr-only(for='user_id') User ID         
-          input#inputuser_id.form-control(type='text', placeholder='User ID', required='', autofocus='')
-          label.sr-only(for='inputPassword') Password         
-          input#inputPassword.form-control(type='password', placeholder='Password', required='')        
-         div(style='margin-top: 50px;')
-          button.btn.btn-lg.btn-primary.btn-block(type='submit')  로그인  
-          button.btn.btn-lg.btn-primary.btn-block(type='submit')  회원가입
-          
+  .container
+    .row
+      .col-md-6
+        h3 설문조사 서비스 
+        p  설문조사입니다.
+      .col-md-6
+        h3 설문조사  
