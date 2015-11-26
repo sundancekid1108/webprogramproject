@@ -8,8 +8,8 @@ var mongoose = require('mongoose');
 var flash = require('connect-flash');
 var session = require('express-session');
 var methodOverride = require('method-override');
-//var passport = require('passport');    //페북인증
-//var configAuth = require('./config/auth');  // 페북인증
+var passport = require('passport');    //페북인증
+var configAuth = require('./config/auth');  // 페북인증
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -26,7 +26,7 @@ app.set('view engine', 'jade');
 mongoose.connect('mongodb://webuser:webuser@ds053954.mongolab.com:53954/webwebweb');
 mongoose.connection.on('error', console.log);
 
-// uncomment after placing your favicon in /public    // 페북인증용
+//uncomment after placing your favicon in /public    // 페북인증용
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));     // 페북인증용
 
 
@@ -53,8 +53,8 @@ app.use('/users', users);
 
 
 
-//app.use(passport.initialize());    // 페북인증
-//app.use(passport.session());      // 페북인증용
+app.use(passport.initialize());    // 페북인증
+app.use(passport.session());      // 페북인증용
 
 app.use(function(req, res, next) {
   console.log("REQ USER", req.user);
@@ -63,7 +63,7 @@ app.use(function(req, res, next) {
   next();
 });
 
-//configAuth(passport);  //페북인증용
+configAuth(passport);  //페북인증용
 
 app.use('/', routes);
 app.use('/users', users);
