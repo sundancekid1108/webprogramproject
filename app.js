@@ -13,7 +13,8 @@ var configAuth = require('./config/auth');  // 페북인증
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
-var auth = require('./routes/auth');
+//var routeAuth = require('./routes/auth');
+
 
 var app = express();
 
