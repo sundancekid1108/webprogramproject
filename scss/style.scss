@@ -1,21 +1,18 @@
-@import "../bower_components/bourbon/app/assets/stylesheets/bourbon";
-@import "./includes/signin";
-
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   margin-top: 50px;
   padding-top: 1em;
+  & > .main-content {
+    min-height: 400px;
+  }
 }
-
 a {
   color: #00B7FF
 }
 
-
-
 .jumbotron {
   margin-top: -1em;
-  background: url('/images/bg.jpg') no-repeat left top;
+  background: url('/images/newyork.jpg') no-repeat left top;
   -webkit-background-size: 100%;
   -moz-background-size: 100%;
   -o-background-size: 100%;
@@ -33,3 +30,19 @@ a {
   border-top: 1px solid #e5e5e5;
 }
 
+.footer {
+  margin-top: 1em;
+  width: 100%;
+  height: 60px;
+  background-color: #f5f5f5;
+
+  .container {
+    padding-right: 1em;
+    padding-left: 1em;
+
+    .text-muted {
+      margin: 20px 0;
+      color: #bbb;
+    }
+  }
+}

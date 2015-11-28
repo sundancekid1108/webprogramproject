@@ -4,58 +4,51 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
-var flash = require('connect-flash');
 var session = require('express-session');
 var methodOverride = require('method-override');
-var passport = require('passport');    //페북인증
-var configAuth = require('./config/auth');  // 페북인증
+var flash = require('connect-flash');
+var mongoose   = require('mongoose');
+var passport = require('passport');
+var configAuth = require('./config/auth');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
-//var routeAuth = require('./routes/auth');
-
+var routeAuth = require('./routes/auth');
 
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+if (app.get('env') === 'development') {
+  app.locals.pretty = true;
+}
+app.locals.moment = require('moment');
 
-
-// mongodb connect  이부분은 내가 새로 수정하기
+// mongodb connect
 mongoose.connect('mongodb://webuser:webuser@ds053954.mongolab.com:53954/webwebweb');
 mongoose.connection.on('error', console.log);
 
-//uncomment after placing your favicon in /public    // 페북인증용
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));     // 페북인증용
-
-
+// uncomment after placing your favicon in /public
+//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(flash());
+app.use(methodOverride('_method', {methods: ['POST', 'GET']}));
 
 app.use(session({
   resave: true,
   saveUninitialized: true,
   secret: 'long-long-long-secret-string-1313513tefgwdsvbjkvasd'
 }));
+app.use(flash());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(methodOverride('_method', {methods: ['POST', 'GET']}));
 app.use('/bower_components',  express.static(path.join(__dirname, '/bower_components')));
 
 
-app.use('/', routes);
-app.use('/users', users);
-
-
-
-
-
-app.use(passport.initialize());    // 페북인증
-app.use(passport.session());      // 페북인증용
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(function(req, res, next) {
   console.log("REQ USER", req.user);
@@ -64,13 +57,11 @@ app.use(function(req, res, next) {
   next();
 });
 
-configAuth(passport);  //페북인증용
+configAuth(passport);
 
 app.use('/', routes);
 app.use('/users', users);
-//routeAuth(app, passport);   //페북인증용
-
-
+routeAuth(app, passport);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

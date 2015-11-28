@@ -1,9 +1,9 @@
 {
-  "name": "webprogramproject",
+  "name": "newwebproject",
   "version": "0.0.0",
-  "homepage": "",
+  "homepage": "https://github.com/sundancekid1108/webprogramproject",
   "authors": [
-    "양원철  sundancekid1108@gmail.com "
+    "양원철"
   ],
   "license": "MIT",
   "ignore": [
