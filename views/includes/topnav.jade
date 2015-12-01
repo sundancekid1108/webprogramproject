@@ -10,16 +10,23 @@
         i.fa.fa-home
     #navbar.collapse.navbar-collapse
       ul.nav.navbar-nav
-        li
-          a(href='/survey') survey
-        li
-          a(href='/users') Users
+        if (currentUser) 
+          li
+            a(href='/survey') survey
+          li
+            a(href='/users') users
+        else
+          li
+            a(href='/users') Users
       ul.nav.navbar-nav.navbar-right
         if (currentUser) 
+          li
+            a(href='/survey/new') SurveyMaking           
           li
             a(href='/users/#{currentUser._id}') Profile
           li
             a(href='/signout') Signout
+          
         else
           li
             a(href='/signin') Signin

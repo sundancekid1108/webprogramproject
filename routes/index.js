@@ -12,6 +12,7 @@ router.get('/signin', function(req, res, next) {
   res.render('signin');
 });
 
+
 router.use('/survey', survey);
 
 module.exports = router;
