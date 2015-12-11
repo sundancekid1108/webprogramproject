@@ -2,4 +2,23 @@ extend ../layout
 
 block content
 	.container
-		h1 hello
+		h1 설문조사 작성하세요.
+		
+		form(action='/survey', method = 'POST')
+			.form-group
+				label(for='title') 제목
+				input.form-control(name='title')
+			.form-group
+				label(for='writer') 작성자 
+				input.form-control(name='writer')
+			.form-group
+				label(for= 'email') 이메일
+				input.form-control(name= 'email')
+			.form-group
+				label(for='content') 설문내용설명
+				textarea.form-control(name='content')
+			
+			.form-action
+				a.btn.btn-default(href='javascript:window.history.back();') 뒤로 
+				| &nbsp;
+				button.btn.btn-primary(type='submit') 설문등록

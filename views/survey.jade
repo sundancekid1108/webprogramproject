@@ -1,7 +1,27 @@
 extends layout
 
+
 block content
   .container
-    .row
-      .col-md-8
-        include ./includes/surveymain
+    h1.page-header SurveyList
+    
+    
+    table.table.table-striped
+      thead
+        tr
+          th 설문조사명
+          th 조사팀/조사자
+          th 이메일주소
+          th 생성날짜
+          th 조회수
+        each survey in surveys
+          tr
+            td
+              a(href='/survey/#{survey.id}')= survey.title
+            td= survey.writer
+            td= survey.email
+            td= moment(survey.createdAt).format('YYYY/MM/DD')
+            td= survey.numComment
+    a.btn.btn-primary(href='/survey/new') 설문조사 추가
+    | &nbsp;
+    a.btn.btn-default(href='javascript:window.history.back();') 뒤로

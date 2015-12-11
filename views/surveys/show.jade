@@ -1,0 +1,7 @@
+extend ../layout
+
+block content
+	.container
+		h1 설문조사 제목 = survey.title
+		h3 설문조사 작성자 by #{survey.writer}, email= #{survey.email}
+		.well= survey.content

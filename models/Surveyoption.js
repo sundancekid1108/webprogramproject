@@ -2,8 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var schema = new Schema({
-  title: {type: String, required: true, trim: true},
-  writer:{type: String, required: true, trim: true},
+  survey: {type:Schema.Types.ObjectID, required: true, trim: true},
   email: {type: String, required: true, trim: true},
   content: {type: String, required: true, tim: true},
   numComment:{type: Number, default:0},
