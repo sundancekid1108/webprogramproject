@@ -2,6 +2,27 @@ extend ../layout
 
 block content
 	.container
-		h1 설문조사 제목 = survey.title
+		h1 설문조사 제목 = #{survey.title}
 		h3 설문조사 작성자 by #{survey.writer}, email= #{survey.email}
 		.well= survey.content
+		
+		hr
+		h3 설문문항 (#{survey.numComment})
+		table.table
+			tr
+				th= 문제 
+				th= 날짜
+
+		
+		form.form-inline(action='/posts/' + survey._id + '/comments', method='POST') <!--아이디
+			.form-group
+				label.sr-only(for='email') email
+				input.form-control(name='email', placeholder='email')
+			.form-group
+				label.sr-only(for='content') content
+				input.form-control(name='content', size=50, placeholder='content')
+			button.btn.btn-info 댓글저장
+			
+		hr
+		if (currentUser) 
+			a.btn.btn-default(href='/survey') 설문목록		

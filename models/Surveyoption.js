@@ -1,18 +1,18 @@
 var mongoose = require('mongoose');
+var moment= require('moment');
 var Schema = mongoose.Schema;
 
 var schema = new Schema({
-  survey: {type:Schema.Types.ObjectID, required: true, trim: true},
-  email: {type: String, required: true, trim: true},
+  Survey: {type: Schema.Types.ObjectId, required: true, trim: true},// 아이디로 받음
   content: {type: String, required: true, tim: true},
-  numComment:{type: Number, default:0},
-  createdAt: {type: Date, default: Date.now},
+  contentvalue: {type: String},
+createdAt: {type: Date, default: Date.now}
 
 }, {
   toJSON: { virtuals: true},
   toObject: {virtuals: true}
 });
 
-var Survey = mongoose.model('Survey', schema);
+var Surveyoption = mongoose.model('Surveyoption', schema);
 
-module.exports = Survey;
+module.exports = Surveyoption;
